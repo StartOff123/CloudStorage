@@ -7,6 +7,7 @@ const generateId = () =>
         .join('')
 
 const normalizeFileName = (req: any, file: { originalname: string; }, callback: (arg0: any, arg1: string) => void) => {
+    file.originalname = Buffer.from(file.originalname, 'latin1').toString('utf8')
     const fileExtName = file.originalname.split('.').pop()
 
     callback(null, `${generateId()}.${fileExtName}`)
